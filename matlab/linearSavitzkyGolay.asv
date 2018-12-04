@@ -1,0 +1,40 @@
+function [vx, vy] = linearSavitzkyGolay(A, data, x, y, N)
+%
+% -- input
+%       A: input neighborhood events, 3*localSize
+%       we only ues real coordinate and timetamp to calculate theta.
+%       The curent event (x,y) corresponds to A median coordinate.
+
+% A先不要去掉时间久远的事件，全部计算结束后再去掉。
+theta = zeros(1, 2);
+localSize = size(A,2);
+ii = 0;
+jj = 0;
+med = max(A(3,:))*9/10;
+
+for i = 1:N
+    for j = 1:N
+        t1 = data(i,j);
+        if t1>=med
+            for xx = i+1:N
+                t2 = data(x+xx, y+j);
+                if t2>=med
+                    theta(0) = theta(0)+(t2-t1)/(xx-i);
+                    ii++;
+                end
+            end
+            
+            for yy = j+1:N
+                t2 = data(x+i, y+yy);
+                if(t2>=med)
+                    t
+        end
+    end
+    
+    for
+end
+            
+
+
+
+

@@ -1,0 +1,34 @@
+function [vx, vy] = singleFit(A)
+%
+% --input
+%       A: include local plane accordinate and timestamp, 4*localSize
+%       [x+i,y+i,t*1e-6,1];t = lastTimesMap[x + i][y + i][type];
+%       i = -searchDistance : searchDistance.
+
+localSize = size(A,2);
+forthDimension = ones(1,localSize);
+neighborhood = cat(1, A, forthDimension); % 要过滤掉far away的时间
+
+if (localSize < 3)  % 此处3指的是算上邻域总共有3个像素; 如果邻域大小是7*7，则localSize = size(neighborhood,2)=49.
+    vx = 0;
+    vy = 0;
+    return;
+end
+sx2 = 0;
+sy2 = 0;
+st2 = 0;
+sxy = 0;
+sxt = 0;
+syt = 0;
+sxx = 0;
+syy = 0;
+stt = 0;
+
+for i=1:localSize
+    sx2 = sx2 + neighborhood(1,i)*neighborhood(1,i);
+    sy2 = sy2 + neighborhood(2,i)*neighborhood(2,i);
+    st2 = st2 + neighborhood(3,i)*neighborhood(3,i);
+    sxy = sxy + neighborhood(1,i)*neighborhood(2,i);
+    sxt = sxt + neighborhood(1,i)*neighborhood(3,i);
+    syt = syt + neighb
+    
